@@ -20,7 +20,11 @@
 export default {
     data () {
         return {
-            communities: []
+            communities: [
+                {
+                    logoPath: 'https://11.url.cn/now/app/community-pc/img/IVWEB_flow_869e7914.png'
+                }
+            ]
         }
     },
 

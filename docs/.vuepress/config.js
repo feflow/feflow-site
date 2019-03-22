@@ -94,7 +94,7 @@ module.exports = {
                         link: '/example/'
                     },
                     {
-                        text: 'Active',
+                        text: 'News',
                         link: '/active/'
                     },
                     {

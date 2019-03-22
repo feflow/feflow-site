@@ -2,6 +2,8 @@
 
 Feflow official site source code and docs.
 
+[中文文档](./README_zh-CN.md)
+
 ## How to develop
 
 ```sh

@@ -43,12 +43,12 @@ export default {
     computed: {
         title () {
             return this.$lang === 'en-US'
-                ? 'Front End Workflow And Rule'
+                ? 'Workflow And Standard'
                 : '前端工作流和规范'
         },
         description () {
             return this.$lang === 'en-US'
-                ? 'Engineered solutions dedicated to improving efficiency and specifications'
+                ? 'A command line tool aims to improve front-end engineer workflow and standard, powered by Node.js.'
                 : '致力于提升研发效率和规范的工程化解决方案'
         },
         introduction () {

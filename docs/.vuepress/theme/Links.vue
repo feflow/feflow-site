@@ -16,22 +16,19 @@
 
 <script>
 export default {
-    data () {
-        return {
-            links: [
-                {
-                    href: 'https://www.ivweb.io/',
-                    name: 'IVWEB'
-                }
-            ]
-        }
-    },
-
     computed: {
         title () {
             return this.$lang === 'en-US'
                 ? 'Links'
                 : '友情链接'
+        },
+        links () {
+            return [
+                {
+                    href: this.$lang === 'en-US' ? 'https://opensource.tencent.com/en' : 'https://opensource.tencent.com/',
+                    name: this.$lang === 'en-US' ? 'Tencent OpenSource' : '腾讯开源'
+                }
+            ]
         }
     }
 }
