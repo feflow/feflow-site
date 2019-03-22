@@ -34,7 +34,7 @@
             <ul class="tools">
                 <li>
                     <router-link
-                        class="nav__link"
+                        :class="styles.langClass"
                         :to="langObject.link"
                         :style="styles.word"
                     >{{ langObject.text }}</router-link>
@@ -90,6 +90,7 @@ export default {
                     color: 'rgba(255, 255, 255, 0.5)'
                 },
                 navClass: 'nav__link',
+                langClass: 'nav__link',
                 logo
             }
 
@@ -100,6 +101,7 @@ export default {
                 styles.logo = logoBlue
                 styles.word.color = `rgba(102, 102, 102, ${alpha})`
                 styles.navClass = 'nav__link--white'
+                styles.langClass = 'nav__lang--white'
             }
 
             return styles
@@ -185,6 +187,7 @@ nav {
 
     &__link,
     &__link--white,
+    &__lang--white,
     &__link--active {
         font-size: 18px;
         letter-spacing: 0px;
@@ -207,6 +210,10 @@ nav {
             height: 4px;
 	        background-color: #327aff;
         }
+    }
+
+    &__lang--white:hover {
+        color: #327aff !important;
     }
 }
 </style>
