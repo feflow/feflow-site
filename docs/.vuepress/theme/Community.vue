@@ -43,7 +43,6 @@ export default {
     &__list {
         margin-top: 63px;
         display: flex;
-        justify-content: center;
         flex-wrap: wrap;
     }
 
