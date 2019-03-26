@@ -60,7 +60,7 @@ export default {
                 transform: translate(-50%, -100%);
                 width: 200px;
                 height: 266px;
-                background-image: url(https://qpic.url.cn/feeds_pic/PiajxSqBRaEI1nox03qk8UNH6FVaOdK9iaqDIQGTLaaJ6OgpzgM2IMjg/);
+                background-image: url("https://qpic.url.cn/feeds_pic/PiajxSqBRaEI1nox03qk8UNH6FVaOdK9iaqDIQGTLaaJ6OgpzgM2IMjg/");
                 background-size: 100%;
             }
         }
