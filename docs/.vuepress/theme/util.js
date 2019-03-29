@@ -72,6 +72,34 @@ export function getTag(repo) {
     }
 };
 
+// 根据标签获取标签文本
+export function getTagTextById(lang, tag) {
+    switch (tag) {
+        case 'all':
+            return lang === 'en-US'
+                ? 'All'
+                : '全部';
+
+        case 'generator':
+            return lang === 'en-US'
+                ? 'Generator'
+                : '脚手架';
+
+        case 'builder':
+            return lang === 'en-US'
+                ? 'Builder'
+                : '构建器';
+
+        case 'plugin':
+            return lang === 'en-US'
+                ? 'Plugin'
+                : '插件';
+
+        default:
+            return ''
+    }
+}
+
 // 根据 cnpm 返回的信息找到仓库作者
 export function getAuthorName({
     author = {},

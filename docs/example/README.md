@@ -1,3 +1,3 @@
 ---
-layout: BlogList
+layout: EncologyList
 ---

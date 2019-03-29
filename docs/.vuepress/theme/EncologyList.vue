@@ -1,35 +1,64 @@
 <template>
     <section class="encologies">
-
+        <ul
+            v-if="pageConfig.isShowTab"
+            class="encologies__tags"
+        >
+            <li
+                v-for="(tag, index) in tags"
+                :key="index"
+                class="encologies__tags-item"
+            >
+                <router-link
+                    :class="currentTag === tag ? 'encologies__tags-item-link--active' : 'encologies__tags-item-link'"
+                    :to="tag === defaultTag ?  $route.path : $route.path + '#' + tag"
+                >{{ getTagText(tag) }}</router-link>
+            </li>
+        </ul>
         <ul class="encologies__list">
             <li
                 class="encologies__item"
                 v-for="encology in encologies"
+                v-if="encology.tag === currentTag || currentTag === defaultTag"
                 :key="encology.id"
             >
                 <router-link
+                    v-if="!pageConfig.isNavToGit"
                     class="encologies__item-link"
-                    :to="'detail.html?id=' + encology.id"
+                    :to="getLink(encology.id)"
                 >
-                    <div class="encologies__item--left">
-                        <p class="encologies__item-title">{{ encology.name }}</p>
-                        <p class="encologies__item-description">{{ encology.description }}</p>
+                    <div
+                        class="encologies__item-image"
+                        :style="{ backgroundColor: getColor() }"
+                    >
+                        <img
+                            :src="encology.image || defaultImage"
+                            alt=""
+                        >
                     </div>
-                    <div class="encologies__item--right">
-                        <div class="encologies__item-note">
-                            <i class="encologies__item-note-icon icon-avatar"></i>
-                            <p class="encologies__item-note-text">{{ encology.master }}</p>
-                        </div>
-                        <div class="encologies__item-note">
-                            <i class="encologies__item-note-icon icon-version"></i>
-                            <p class="encologies__item-note-text">{{ encology.version }}</p>
-                        </div>
-                        <div class="encologies__item-note">
-                            <i class="encologies__item-note-icon icon-time"></i>
-                            <p class="encologies__item-note-text">{{ encology.updateTime }}</p>
-                        </div>
-                    </div>
+                    <p class="encologies__item-name line-one">{{ encology.name }}</p>
+                    <p class="encologies__item-time line-one">{{ encology.updateTime }}</p>
+                    <p class="encologies__item-description line-two">{{ encology.description }}</p>
                 </router-link>
+                <a
+                    v-else
+                    class="encologies__item-link"
+                    :href="getLink(encology.id)"
+                    target="_blank"
+                >
+                    <div
+                        class="encologies__item-image"
+                        :style="{ backgroundColor: getColor() }"
+                    >
+                        <img
+                            :src="encology.image || defaultImage"
+                            alt=""
+                        >
+                    </div>
+                    <p class="encologies__item-name line-one">{{ encology.name }}</p>
+                    <p class="encologies__item-time line-one">{{ encology.updateTime }}</p>
+                    <p class="encologies__item-description line-two">{{ encology.description }}</p>
+                </a>
             </li>
         </ul>
     </section>
@@ -44,23 +73,69 @@ import {
     getAuthorName,
     getTag,
     getRepoInfo,
-    getPackageInfo
+    getPackageInfo,
+    getTagTextById
 } from './util'
+import defaultImage from './images/plugin-icon.png';
 
 export default {
     data () {
         return {
-            encologies: []
+            currentTag: '',
+            defaultTag: 'all',
+            encologies: [],
+            tags: ['all', 'generator', 'builder', 'plugin'],
+            defaultImage
+        }
+    },
+
+    computed: {
+        pageConfig() {
+            const config = this.$page.frontmatter || {};
+            const {
+                isShowTab = true,
+                isNavToGit = false,
+                themeColor = '#9fb5dd'
+            } = config;
+
+            return { isShowTab, isNavToGit, themeColor };
         }
     },
 
     mounted () {
         this.getRepoInfo();
+        this.updateTag();
+    },
+
+    watch: {
+        '$route'() {
+            this.updateTag()
+        }
     },
 
     methods: {
+        getTagText(tag) {
+            const lang = this.$lang;
+            return getTagTextById(lang, tag);
+        },
+        // 获取随机颜色
+        getColor() {
+            const colors = [this.pageConfig.themeColor];
+            const index = Math.floor(colors.length * Math.random());
+            return colors[index];
+        },
+        getLink(encologyId) {
+            const { isNavToGit } = this.pageConfig;
+            return isNavToGit
+                ? `https://github.com/${decodeURIComponent(encologyId)}`
+                : 'detail.html?id=' + encologyId;
+        },
         encodeUrl (encology) {
             return encodeURIComponent(encology)
+        },
+        updateTag() {
+            // 标记当前的标签
+            this.currentTag = decodeURIComponent(location.hash.replace('#', '')) || this.defaultTag;
         },
         getRepoInfo () {
             // 先检查存储中是否有
@@ -130,22 +205,57 @@ export default {
 <style lang="less" scoped>
 .encologies {
 
+    &__tags {
+        display: flex;
+        justify-content: center;
+
+        &-item {
+            width: 100px;
+            height: 40px;
+            margin: 0 17.5px;
+            font-size: 16px;
+	        line-height: 40px;
+            text-align: center;
+
+            &-link--active,
+            &-link {
+                display: block;
+                width: 100%;
+                height: 100%;
+                border-radius: 20px;
+                color: #666666;
+            }
+
+            &-link--active,
+            &-link:hover {
+                color: #ffffff;
+                background-color: #327aff;
+            }
+        }
+    }
+
     &__list {
         margin-top: 28px;
         width: 100%;
         display: flex;
-        justify-content: space-between;
         flex-wrap: wrap;
     }
 
     &__item {
         margin-top: 11px;
-        width: 594px;
-        height: 280px;
+        margin-right: 14px;
+        width: 390px;
+        height: 400px;
+        background-color: #fff;
 
         &:first-child,
-        &:nth-child(2) {
+        &:nth-child(2),
+        &:nth-child(3) {
             margin-top: 0;
+        }
+
+        &:nth-child(3n+3) {
+            margin-right: 0;
         }
 
         &:hover {
@@ -153,59 +263,41 @@ export default {
         }
 
         &-link {
-            display: flex;
             width: 100%;
             height: 100%;
         }
 
-        &--left {
-            width: 400px;
-	        height: 100%;
-            background-image: linear-gradient(
-                180deg,
-                #327aff 0%,
-                #32d6df 100%
-            );
-            color: #ffffff;
-        }
-
-        &-title,
+        &-name,
+        &-time,
         &-description {
-            padding: 0 32px;
+            padding: 0 27px;
         }
 
-        &-title {
-            margin-top: 67px;
-	        font-size: 30px;
-	        font-weight: bold;
-        }
-
-        &-description {
-            margin-top: 22px;
-            font-size: 18px;
-        }
-
-        &--right {
-            flex-grow: 1;
-            padding: 50px 32px;
+        &-image {
+            width: 100%;
+            height: 240px;
             display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: flex-start;
-            background-color: #ffffff;
-            font-size: 18px;
-            color: #aaaaaa;
-        }
-
-        &-note {
-            display: flex;
+            justify-content: center;
             align-items: center;
+        }
 
-            &-icon {
-                margin-right: 14px;
-                width: 22px;
-                height: 22px;
-            }
+        &-name {
+            margin-top: 20px;
+            font-size: 28px;
+            font-weight: bold;
+	        color: #327aff;
+        }
+
+        &-time {
+            margin-top: 6px;
+            font-size: 14px;
+	        color: #aaaaaa;
+        }
+
+        &-description {
+            margin-top: 6px;
+            font-size: 18px;
+	        color: #999999;
         }
     }
 }

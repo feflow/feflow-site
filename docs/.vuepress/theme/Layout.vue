@@ -97,6 +97,29 @@ li {
     color: #4e4e4e;
     text-align: center;
 }
+
+.line-one {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.line-muilti {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+
+.line-two {
+    .line-muilti;
+    -webkit-line-clamp: 2;
+}
+
+.line-three {
+    .line-muilti;
+    -webkit-line-clamp: 3;
+}
 </style>
 
 <style lang="less" scoped>
