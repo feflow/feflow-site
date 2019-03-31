@@ -18,7 +18,8 @@ export function getRepo(path = '') {
 }
 
 // 从 cnpm 上面获取仓库信息
-export function getRepoInfo(repo) {
+export function getRepoInfo(encologyPath) {
+    const repo = getRepo(encologyPath)
     const url = `https://registry.npm.taobao.org/${repo}/latest`;
 
     return axios.get(url)
@@ -33,8 +34,9 @@ export function getRepoInfo(repo) {
             const updateTime = new Date(publishTime).toLocaleDateString();
             const master = getAuthorName({ author, maintainers });
             const version = ''
+            const github = `https://github.com/${encologyPath}`
 
-            return { name, description, master, updateTime, version }
+            return { name, description, master, updateTime, version, github }
         });
 }
 

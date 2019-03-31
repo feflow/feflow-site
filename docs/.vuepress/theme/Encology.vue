@@ -16,8 +16,14 @@
                 <p class="encology__info-key">更新时间</p>
             </li>
             <li class="encology__info-item encology__info-github">
-                <i class="icon-github"></i>
-                <p>Github</p>
+                <a
+                    class="encology__info-github-link"
+                    :href="encology.github"
+                    target="_blank"
+                >
+                    <i class="icon-github"></i>
+                    <p>Github</p>
+                </a>
             </li>
         </ul>
         <div class="encology__line"></div>
@@ -60,15 +66,15 @@ export default {
             // 没有存储则需要自己请求
             if (!encology) {
                 const encologyPath = decodeURIComponent(id)
-                const repo = getRepo(encologyPath)
                 // Request info and addition info.
-                const mainRequest = getRepoInfo(repo)
+                const mainRequest = getRepoInfo(encologyPath)
                 const addtionRequest = getPackageInfo(encologyPath)
                 const docRequest = getDocInfo(encologyPath)
 
                 mainRequest.then(mainInfo => {
                     // 实时添加进数据中
                     this.encology = mainInfo
+
                     // 同步一份到 store 中
                     store.$set(store.encologyMap, id, { main: mainInfo })
 
@@ -161,13 +167,19 @@ export default {
         &-github {
             width: 220px;
             height: 100%;
-            border-radius: 36px;
-            border: solid 2px #327aff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 24px;
-	        color: #327aff;
+
+            &-link {
+                display: block;
+                border-radius: 36px;
+                border: solid 2px #327aff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 24px;
+                color: #327aff;
+                width: 100%;
+                height: 100%;
+            }
 
             .icon-github {
                 margin-right: 11px;

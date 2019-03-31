@@ -163,7 +163,7 @@ export default {
                 const tag = getTag(repo)
 
                 // Request info and addition info.
-                const mainRequest = getRepoInfo(repo)
+                const mainRequest = getRepoInfo(encology)
                 const addtionRequest = getPackageInfo(encology)
 
                 mainRequest.then(mainInfo => {

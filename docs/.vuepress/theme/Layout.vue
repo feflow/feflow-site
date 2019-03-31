@@ -104,7 +104,7 @@ li {
     white-space: nowrap;
 }
 
-.line-muilti {
+.line-multi {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -112,12 +112,14 @@ li {
 }
 
 .line-two {
-    .line-muilti;
+    .line-multi;
+    -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
 }
 
 .line-three {
-    .line-muilti;
+    .line-multi;
+    -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
 }
 </style>
