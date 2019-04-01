@@ -59,24 +59,32 @@ export default {
     methods: {
         getRepoInfo () {
             const parsed = queryString.parse(location.search);
-            const id = parsed.id;
-            const { encologyMap = {} } = store
+            const id = encodeURIComponent(parsed.id);
+            const encologyPath = decodeURIComponent(id);
+            // 目前只有生态系统需要在此页面展示
+            const dataField = 'encologies'
+            const { encologyMap = {} } = store.pages[dataField] || {};
             const encology = encologyMap[id]
 
             // 没有存储则需要自己请求
             if (!encology) {
-                const encologyPath = decodeURIComponent(id)
                 // Request info and addition info.
                 const mainRequest = getRepoInfo(encologyPath)
                 const addtionRequest = getPackageInfo(encologyPath)
                 const docRequest = getDocInfo(encologyPath)
+
+                // 开辟一个子存储器存储
+                store.$set(store.pages, dataField, {
+                    encologyIdList: [],
+                    encologyMap: {}
+                });
 
                 mainRequest.then(mainInfo => {
                     // 实时添加进数据中
                     this.encology = mainInfo
 
                     // 同步一份到 store 中
-                    store.$set(store.encologyMap, id, { main: mainInfo })
+                    store.$set(store.pages[dataField].encologyMap, id, { main: mainInfo })
 
                     addtionRequest.then(packageInfo => {
                         const origin = this.encology;
@@ -86,7 +94,8 @@ export default {
                             ...packageInfo
                         }
                         // 同步一份到 store 中
-                        store.$set(store.encologyMap[id], 'package', packageInfo)
+                        store.$set(store.pages[dataField].encologyMap[id], 'package', packageInfo)
+
                     })
                     .catch(error => {
                         console.log('error', error)
@@ -95,7 +104,7 @@ export default {
                     docRequest.then(docHTML => {
                         this.docHTML = docHTML
                         // 同步一份到 store 中
-                        store.$set(store.encologyMap[id], 'doc', docHTML)
+                        store.$set(store.pages[dataField].encologyMap[id], 'doc', docHTML)
                     })
 
                     return mainInfo;
@@ -110,7 +119,7 @@ export default {
                     docRequest.then(docHTML => {
                         this.docHTML = docHTML
                         // 同步一份到 store 中
-                        store.$set(store.encologyMap[id], 'doc', docHTML)
+                        store.$set(store.pages[dataField].encologyMap[id], 'doc', docHTML)
                     })
                 } else {
                     const docHTML = encology.doc || {}

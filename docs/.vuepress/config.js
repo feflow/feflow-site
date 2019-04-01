@@ -1,5 +1,6 @@
 
 const encologies = require('./encologies');
+const examples = require('./examples');
 
 const EN = 'EN'
 const ZH = 'ZH'
@@ -82,6 +83,7 @@ module.exports = {
                 getStartNav: '/guide/',
                 // encologies config.
                 encologies,
+                examples,
                 // navbar config. The type is Array, array's item is an object.
                 navs: [
                     {
@@ -118,6 +120,7 @@ module.exports = {
                 getStartNav: '/zh/guide/',
                 // encologies config.
                 encologies,
+                examples,
                 // navbar config. The type is Array, array's item is an object.
                 navs: [
                     {

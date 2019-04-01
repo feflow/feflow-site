@@ -95,10 +95,12 @@ export default {
             const {
                 isShowTab = true,
                 isNavToGit = false,
-                themeColor = '#9fb5dd'
+                themeColor = '#9fb5dd',
+                // 默认是生态系统数据
+                dataField = 'encologies'
             } = config;
 
-            return { isShowTab, isNavToGit, themeColor };
+            return { isShowTab, isNavToGit, themeColor, dataField };
         }
     },
 
@@ -110,6 +112,10 @@ export default {
     watch: {
         '$route'() {
             this.updateTag()
+        },
+        'pageConfig.dataField': function () {
+            this.getRepoInfo();
+            this.updateTag();
         }
     },
 
@@ -138,10 +144,19 @@ export default {
             this.currentTag = decodeURIComponent(location.hash.replace('#', '')) || this.defaultTag;
         },
         getRepoInfo () {
+            // 如果没有就需要请求
+            const dataField = this.pageConfig.dataField
+
+            if (!dataField) {
+                return;
+            }
+
+            const storeChildren = store.pages[dataField]
+
             // 先检查存储中是否有
-            if (store.encologyIdList.length) {
-                const encologyMap = store.encologyMap
-                const encologies = store.encologyIdList.map(id => {
+            if (storeChildren && storeChildren.encologyIdList.length) {
+                const encologyMap = storeChildren.encologyMap
+                const encologies = storeChildren.encologyIdList.map(id => {
                     const encology = encologyMap[id] || {}
                     const mainInfo = encology.main || {}
                     const packageInfo = encology.package || {}
@@ -153,9 +168,17 @@ export default {
                 return
             }
 
-            // 如果没有就需要请求
-            const { encologies = [] } = this.$themeLocaleConfig
+            const encologies = this.$themeLocaleConfig[dataField] || []
             const uniqueEncologies = Array.from(new Set(encologies))
+
+            // 开辟一个子存储器存储
+            store.$set(store.pages, dataField, {
+                encologyIdList: [],
+                encologyMap: {}
+            });
+
+            // 清空之前的缓存
+            this.encologies = []
 
             uniqueEncologies.forEach(encology => {
                 const id = encodeURIComponent(encology)
@@ -174,8 +197,9 @@ export default {
                         const index = this.encologies.length
                         this.encologies.push(mainInfo)
                         // 同步一份到 store 中
-                        store.encologyIdList.push(id);
-                        store.$set(store.encologyMap, id, { main: mainInfo })
+                        console.log(store, dataField);
+                        store.pages[dataField].encologyIdList.push(id);
+                        store.$set(store.pages[dataField].encologyMap, id, { main: mainInfo })
 
                         addtionRequest.then(packageInfo => {
                             const origin = this.encologies[index];
@@ -185,7 +209,7 @@ export default {
                                 ...packageInfo
                             })
                             // 同步一份到 store 中
-                            store.$set(store.encologyMap[id], 'package', packageInfo)
+                            store.$set(store.pages[dataField].encologyMap[id], 'package', packageInfo)
                         })
                         .catch(error => {
                             console.log('error', error)
