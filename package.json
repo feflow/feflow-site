@@ -29,5 +29,13 @@
     "humps": "^2.0.1",
     "markdown-it": "^8.4.2",
     "query-string": "^6.4.0"
-  }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8",
+    "iOS >= 6",
+    "Android > 4.1",
+    "Firefox > 20"
+  ]
 }
