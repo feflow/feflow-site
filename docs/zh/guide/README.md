@@ -46,3 +46,4 @@ Feflow 引入了构建器这个概念，它的基本思想是将构建脚本进�
 
 ## 贡献者
 
+[![贡献者](https://camo.githubusercontent.com/c7a57799d85cf13ce8ee0ecfb7039922726aff4a/68747470733a2f2f6f70656e636f6c6c6563746976652e636f6d2f6665666c6f772f636f6e7472696275746f72732e7376673f77696474683d38393026627574746f6e3d66616c7365)](https://github.com/feflow/feflow/graphs/contributors)

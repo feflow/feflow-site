@@ -44,3 +44,5 @@ Feflow introduces the concept of a builder. Its basic idea is to manage the buil
 In addition to providing basic functionality, Feflow also has a plug-in mechanism to easily extend subcommands. You can use the plugin to do a lot of automation, such as batch compression of images, building operational activities, local development SDK, code statistics and so on.
 
 ## Contributor
+
+[![贡献者](https://camo.githubusercontent.com/c7a57799d85cf13ce8ee0ecfb7039922726aff4a/68747470733a2f2f6f70656e636f6c6c6563746976652e636f6d2f6665666c6f772f636f6e7472696275746f72732e7376673f77696474683d38393026627574746f6e3d66616c7365)](https://github.com/feflow/feflow/graphs/contributors)
