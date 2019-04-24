@@ -7,10 +7,14 @@
                 v-for="(community, index) in communities"
                 :key="index"
             >
-                <img
-                    :src="community.logoPath"
-                    alt="community logo"
+                <a
+                    :href="community.href"
                 >
+                    <img
+                        :src="community.logoPath"
+                        alt="community logo"
+                    >
+                </a>
             </li>
         </ul>
     </div>
@@ -22,7 +26,8 @@ export default {
         return {
             communities: [
                 {
-                    logoPath: 'https://11.url.cn/now/app/community-pc/img/IVWEB_flow_869e7914.png'
+                    logoPath: 'https://11.url.cn/now/app/community-pc/img/IVWEB_flow_869e7914.png',
+                    href: 'https://www.ivweb.io/'
                 }
             ]
         }
