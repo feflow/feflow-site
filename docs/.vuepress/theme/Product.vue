@@ -68,6 +68,14 @@ export default {
                 {
                     name: '创数据',
                     iconPath: 'https://qpic.url.cn/feeds_pic/ajNVdqHZLLAJibJEc5E7tfibu7xdpyxe1SmLWkZicSLs49pgRbJ7ODicOg/'
+                },
+                {
+                    name: '腾讯新闻',
+                    iconPath: 'https://qpic.url.cn/feeds_pic/PiajxSqBRaEJagsYBTibBh6myFcwNpARPh6uk9RQnxaGttcKhuBRE3LQ/'
+                },
+                {
+                    name: '企鹅电竞',
+                    iconPath: 'https://qpic.url.cn/feeds_pic/PiajxSqBRaEKJ4LaYdpvrLevJAB5oAcTiakRIoq9KY50dtTzvuAE0Tlw/'
                 }
             ]
         }
