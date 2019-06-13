@@ -6,7 +6,7 @@
 
 ## Feflow 是什么
 
-Feflow (读音 /ˈfefləʊ/)是腾讯开源的用于提升工程效率的**前端工作流和规范工具**。最新版本是v0.15.1，托管在Github上：[feflow](https://github.com/feflow/feflow)。目前已经在NOW直播、花样直播、花样交友、手Q附近、群视频、群送礼、回音、应用宝、企鹅号等业务广泛使用。有80+ WEB/IOS/Andriod 稳定用户，累计投入生产项目达到240+。
+Feflow (读音 /ˈfefləʊ/)是腾讯开源的用于提升工程效率的**前端工作流和规范工具**。最新版本是v0.15.8，托管在Github上：[feflow](https://github.com/feflow/feflow)。目前已经在NOW直播、花样直播、花样交友、手Q附近、群视频、群送礼、回音、应用宝、企鹅号等业务广泛使用。有80+ WEB/IOS/Andriod 稳定用户，累计投入生产项目达到240+。
 
 Feflow 借鉴了 Pipline 的思想，将日常的研发工作划分为：初始化、本地开发、打包构建、检查、发布上线五个步骤。分别对应 init、dev、build、test和deploy五个基本命令。
 

@@ -6,7 +6,7 @@ Welcome to Feflow, this document will help you get started quickly. And if you h
 
 ## What is Feflow
 
-Feflow (pronounced /ˈfefləʊ/) is a **front-end flow and rule tool** to improve engineering efficiency. The latest version is v0.15.1, and is hosted on Github: [feflow](https://github.com/feflow/feflow). At present, it has been used in many application, such as Now, Huayang Live, Huayang Friends, Mobile QQ Near Hand, Group Video, Group Gift, Huiyin, Tencent Myapp, Penguins and etc. With 80+ WEB/IOS/Andriod stable users, the cumulative production project reached 240+.
+Feflow (pronounced /ˈfefləʊ/) is a **front-end flow and rule tool** to improve engineering efficiency. The latest version is v0.15.8, and is hosted on Github: [feflow](https://github.com/feflow/feflow). At present, it has been used in many application, such as Now, Huayang Live, Huayang Friends, Mobile QQ Near Hand, Group Video, Group Gift, Huiyin, Tencent Myapp, Penguins and etc. With 80+ WEB/IOS/Andriod stable users, the cumulative production project reached 240+.
 
 Feflow refers to the thinking of Pipeline and divides work into five steps: init, develop, build, test, deploy. And corresponding to five basic commands: init, dev, build, test and deploy.
 
