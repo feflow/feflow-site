@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>腾讯 IVWEB 前端工程化工具 feflow 思考与实践 | Feflow</title>
+    <meta name="description" content="本篇文章主要介绍腾讯 IVWEB 团队从 0 到 1 在工程化的思考和实践。feflow 的全称是 Front-end flow（前端工作流），致力于提升研发效率和规范的工程化解决方案。愿景是通过 feflow，可以使项目创建、开发、构建、规范检查到最终项目上线的整个过程更加自动化和标准化。">
+    <link rel="icon" href="/feflow-site/favicon-196x196.png" sizes="196x196">
+  <link rel="icon" href="/feflow-site/favicon-160x160.png" sizes="160x160">
+  <link rel="icon" href="/feflow-site/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" href="/feflow-site/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" href="/feflow-site/favicon-16x16.png" sizes="16x16">
+    
+    <link rel="preload" href="/feflow-site/assets/css/0.styles.d2836cea.css" as="style"><link rel="preload" href="/feflow-site/assets/js/app.830bb5f6.js" as="script"><link rel="preload" href="/feflow-site/assets/js/31.76a17541.js" as="script"><link rel="prefetch" href="/feflow-site/assets/js/10.ba5322f8.js"><link rel="prefetch" href="/feflow-site/assets/js/11.74cc352b.js"><link rel="prefetch" href="/feflow-site/assets/js/12.ca5c101c.js"><link rel="prefetch" href="/feflow-site/assets/js/13.997ec489.js"><link rel="prefetch" href="/feflow-site/assets/js/14.c2ecedf0.js"><link rel="prefetch" href="/feflow-site/assets/js/15.84935e02.js"><link rel="prefetch" href="/feflow-site/assets/js/16.ddb4ff3d.js"><link rel="prefetch" href="/feflow-site/assets/js/17.07e09052.js"><link rel="prefetch" href="/feflow-site/assets/js/18.e74ab4d3.js"><link rel="prefetch" href="/feflow-site/assets/js/19.2492ae4b.js"><link rel="prefetch" href="/feflow-site/assets/js/2.76846168.js"><link rel="prefetch" href="/feflow-site/assets/js/20.8d689b1b.js"><link rel="prefetch" href="/feflow-site/assets/js/21.3a3c8572.js"><link rel="prefetch" href="/feflow-site/assets/js/22.d0dba7f0.js"><link rel="prefetch" href="/feflow-site/assets/js/23.29fcd762.js"><link rel="prefetch" href="/feflow-site/assets/js/24.ed218c7f.js"><link rel="prefetch" href="/feflow-site/assets/js/25.81a359f0.js"><link rel="prefetch" href="/feflow-site/assets/js/26.3a3dcf58.js"><link rel="prefetch" href="/feflow-site/assets/js/27.96ee5e19.js"><link rel="prefetch" href="/feflow-site/assets/js/28.004ae6c2.js"><link rel="prefetch" href="/feflow-site/assets/js/29.b57ca005.js"><link rel="prefetch" href="/feflow-site/assets/js/3.6ec9936c.js"><link rel="prefetch" href="/feflow-site/assets/js/30.bcd96b84.js"><link rel="prefetch" href="/feflow-site/assets/js/32.44b5e4c1.js"><link rel="prefetch" href="/feflow-site/assets/js/33.9a02d87f.js"><link rel="prefetch" href="/feflow-site/assets/js/34.1eef0da9.js"><link rel="prefetch" href="/feflow-site/assets/js/35.36962af8.js"><link rel="prefetch" href="/feflow-site/assets/js/36.6f8641c6.js"><link rel="prefetch" href="/feflow-site/assets/js/37.7d84ada5.js"><link rel="prefetch" href="/feflow-site/assets/js/38.41d3158d.js"><link rel="prefetch" href="/feflow-site/assets/js/39.0b6264fe.js"><link rel="prefetch" href="/feflow-site/assets/js/4.85403bf4.js"><link rel="prefetch" href="/feflow-site/assets/js/40.721cfa27.js"><link rel="prefetch" href="/feflow-site/assets/js/41.579f75f4.js"><link rel="prefetch" href="/feflow-site/assets/js/42.cf646566.js"><link rel="prefetch" href="/feflow-site/assets/js/43.8393845c.js"><link rel="prefetch" href="/feflow-site/assets/js/44.1c8c9a2a.js"><link rel="prefetch" href="/feflow-site/assets/js/45.6397f27a.js"><link rel="prefetch" href="/feflow-site/assets/js/46.b1041973.js"><link rel="prefetch" href="/feflow-site/assets/js/47.8c8d9ff4.js"><link rel="prefetch" href="/feflow-site/assets/js/5.51ee3184.js"><link rel="prefetch" href="/feflow-site/assets/js/6.9bd7f8c3.js"><link rel="prefetch" href="/feflow-site/assets/js/7.b3eaf0fd.js"><link rel="prefetch" href="/feflow-site/assets/js/8.eeff9dc8.js"><link rel="prefetch" href="/feflow-site/assets/js/9.08acef82.js">
+    <link rel="stylesheet" href="/feflow-site/assets/css/0.styles.d2836cea.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div data-v-4234d345><header style="background-color:rgba(255, 255, 255, 1);box-shadow:0px 2px 30px 0px rgba(0, 0, 0, 0.1);" data-v-2e608884 data-v-4234d345><nav data-v-2e608884><a href="/feflow-site/zh/" class="router-link-active" data-v-2e608884><img src="data:image/png;base64,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" alt="logo" data-v-2e608884></a> <ul class="navs" data-v-2e608884><li class="nav" data-v-2e608884><a href="/feflow-site/zh/guide/" class="nav__link--white" style="color:rgba(102, 102, 102, 1);" data-v-2e608884>文档指南</a></li><li class="nav" data-v-2e608884><a href="/feflow-site/zh/encology/" class="nav__link--white" style="color:rgba(102, 102, 102, 1);" data-v-2e608884>生态系统</a></li><li class="nav" data-v-2e608884><a href="/feflow-site/zh/experience/" class="router-link-active nav__link--white" style="color:rgba(102, 102, 102, 1);" data-v-2e608884>实践案例</a></li><li class="nav" data-v-2e608884><a href="/feflow-site/zh/example/" class="nav__link--white" style="color:rgba(102, 102, 102, 1);" data-v-2e608884>示例</a></li><li class="nav" data-v-2e608884><a href="/feflow-site/zh/active/" class="nav__link--white" style="color:rgba(102, 102, 102, 1);" data-v-2e608884>最新动态</a></li><li class="nav" data-v-2e608884><a href="https://github.com/feflow/feflow/releases" target="_blank" rel="noopener noreferrer" class="nav__link--white" style="color:rgba(102, 102, 102, 1);" data-v-2e608884>发布日志</a></li></ul> <ul class="tools" data-v-2e608884><li data-v-2e608884><a href="/feflow-site/experience/feflow-ivweb-experience.html" class="nav__lang--white" style="color:rgba(102, 102, 102, 1);" data-v-2e608884>English</a></li></ul></nav></header> <div class="layout__content" data-v-4234d345><div class="blog" data-v-1f002194 data-v-4234d345><div class="blog__date" data-v-1f002194><p data-v-1f002194>26</p> <p data-v-1f002194>2019年3月</p></div> <div class="blog__right" data-v-1f002194><div class="content custom" data-v-1f002194><h1 id="腾讯-ivweb-前端工程化工具-feflow-思考与实践"><a href="#腾讯-ivweb-前端工程化工具-feflow-思考与实践" aria-hidden="true" class="header-anchor">#</a> 腾讯 IVWEB 前端工程化工具 feflow 思考与实践</h1> <p><img src="https://qpic.url.cn/feeds_pic/eMJXws7FFlauUALSWA3S7iceia5xM4HrEfUve3X4PJyAw/" alt></p> <p>本篇文章主要介绍<a href="https://ivweb.io/" target="_blank" rel="noopener noreferrer">腾讯 IVWEB 团队<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>从 0 到 1 在工程化的思考和实践。<a href="https://github.com/feflow/feflow" target="_blank" rel="noopener noreferrer">feflow<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>的全称是 Front-end flow（前端工作流），致力于提升研发效率和规范的工程化解决方案。愿景是通过 feflow，可以使项目创建、开发、构建、规范检查到最终项目上线的整个过程更加自动化和标准化。</p> <h3 id="要解决的问题"><a href="#要解决的问题" aria-hidden="true" class="header-anchor">#</a> 要解决的问题</h3> <ul><li>项目的目录结构按约定生成</li> <li>团队有一套开发规范进行约束</li> <li>支持多种类型的构建，包括 Fis 构建和 webpack 构建</li> <li>团队内部的代码贡献统计、离线包内置 App 等</li></ul> <p>为了解决上述问题，我们于 17 年 2 月底开始投入工程化 feflow 工具的开发和相关规范的制定，目前已经研发出了 feflow 的 <a href="https://github.com/feflow/feflow" target="_blank" rel="noopener noreferrer">CLI<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> 版本，后续会推出 GUI 版本。</p> <h3 id="架构设计"><a href="#架构设计" aria-hidden="true" class="header-anchor">#</a> 架构设计</h3> <p><img src="https://qpic.url.cn/feeds_pic/Fia6FID6YXfJiaVVicpFaNg2GfB6KzsNIibpxK3YdDINCGY/" alt></p> <p>为了让 feflow 的具有高可扩展性，我们设计了 4 层结构，分别是：插件生态、内核层、参数解析器和控制台。除了贯穿整个开发工作流的基础命令选择通过内部插件内置在 CLI 的 Core 里面，其它非必要命令统一通过插件机制进行扩展。</p> <p>另一方面，为了使得 feflow 能够适用多种类型的项目。我们开发了多种类型的业务脚手架，如：活动模板、App H5 模板、RN 模板和业务组件模板。</p> <h3 id="执行过程"><a href="#执行过程" aria-hidden="true" class="header-anchor">#</a> 执行过程</h3> <p>当用户在控制台里面输入某个命令。首先会通过 CLI 的参数解析器，将这个命令解析成一个 object 对象，然后传递给 CLI 的内核。所有的命令都是通过内核上下文提供的 register 函数 进行注册的，一方面内核自身会读取内置插件 注册的基础命令，另一方面，内核会读取本地已经安装的外部插件注册的命令。如果找到用户输入的命令则开始执行命令对应的回调函数。</p> <h3 id="基础命令设计"><a href="#基础命令设计" aria-hidden="true" class="header-anchor">#</a> 基础命令设计</h3> <div class="language- extra-class"><pre class="language-text"><code># 初始化项目
+$ feflow init
+
+# 本地开发
+$ feflow dev
+
+# 代码质量检查
+$ feflow lint
+
+# 打包构建
+$ feflow build
+
+# 代码发布
+$ feflow publish
+
+# 安装插件、脚手架等
+$ feflow install package
+
+# 配置本地客户端，如: npm 的源和 proxy
+$ feflow config &lt;key&gt; &lt;value&gt;
+</code></pre></div><p>前面提到，CLI 的命令包含两部分，分别是内置在内核里的基础命令和外部插件提供的命令。那么外部插件要如何设计呢？</p> <h3 id="插件机制设计"><a href="#插件机制设计" aria-hidden="true" class="header-anchor">#</a> 插件机制设计</h3> <h4 id="插件实现原理"><a href="#插件实现原理" aria-hidden="true" class="header-anchor">#</a> 插件实现原理</h4> <p>这里有一个非常巧妙的设计，通过使用 node 提供的 module 和 vm 模块，可以通注入 feflow 全局变量来访问到 cli 的实例。从而能够访问 cli 上的各种属性，比如 config, log 和一些 helper 等。</p> <div class="language- extra-class"><pre class="language-text"><code> loadPlugin(path, callback) {
+    const self = this;
+
+    return fs.readFile(path).then((script) =&gt; {
+
+      const module = new Module(path);
+      module.filename = path;
+      module.paths = Module._nodeModulePaths(path);
+
+      function require(path) {
+          return module.require(path);
+      }
+
+      require.resolve = function(request) {
+          return Module._resolveFilename(request, module);
+      };
+
+      require.main = process.mainModule;
+      require.extensions = Module._extensions;
+      require.cache = Module._cache;
+
+      // Inject feflow variable
+      script = '(function(exports, require, module, __filename, __dirname, feflow){' +
+          script + '});';
+
+      const fn = vm.runInThisContext(script, path);
+
+      return fn(module.exports, require, module, path, pathFn.dirname(path), self);
+      }).asCallback(callback);
+  }
+</code></pre></div><h4 id="命令注册："><a href="#命令注册：" aria-hidden="true" class="header-anchor">#</a> 命令注册：</h4> <p>命令需要以 feflow.cmd.register 进行注册，比如：</p> <div class="language- extra-class"><pre class="language-text"><code>feflow.cmd.register('deps', 'Config ivweb dependencies', function(args) {
+    console.log(args);
+    // Plugin logic here.
+});
+</code></pre></div><p>说明：</p> <ul><li>register 有 3 个参数，第一个是子命令名称，第二个是命令描述说明信息，第三个是对应的子命令执行逻辑函数。</li> <li>feflow 会将命令行参数 args 解析成 Object 对象，传递给插件处理函数</li></ul> <h4 id="配置"><a href="#配置" aria-hidden="true" class="header-anchor">#</a> 配置</h4> <p>可以通过 feflow.version 获取当前 feflow 的版本，feflow.baseDir 获取 feflow 跟目录（在用户目录下的.feflow），通过 feflow.pluginDir 获取插件目录</p> <h4 id="日志"><a href="#日志" aria-hidden="true" class="header-anchor">#</a> 日志</h4> <p>通过 feflow.log 来进行相关命令行日志输出</p> <div class="language- extra-class"><pre class="language-text"><code>const log = feflow.log;
+log.info()    // 提示日志，控制台中显示绿色
+log.debug()   // 调试日志,  命令行增加--debug可以开启，控制台中显示灰色
+log.warn()    // 警告日志，控制台中显示黄色背景
+log.error()   // 错误日志，控制台中显示红色
+log.fatal()   // 致命错误日志，，控制台中显示红色
+</code></pre></div><h4 id="安装"><a href="#安装" aria-hidden="true" class="header-anchor">#</a> 安装</h4> <p>插件开发完成后，可以通过 feflow 提供的 install 命令安装插件。安装的插件会放置在本地客户端 ~/.feflow/node_modules 文件夹下，并且写入到 ~/.feflow/package.json 中</p> <div class="language- extra-class"><pre class="language-text"><code>$ feflow install feflow-plugin-xxx   // 安装某个插件
+</code></pre></div><p>之后每次运行命令时，便会从本地加载插件所注册的命令</p> <h3 id="全量更新和增量更新"><a href="#全量更新和增量更新" aria-hidden="true" class="header-anchor">#</a> 全量更新和增量更新</h3> <p>当 CLI 发布了一个新的版本，可能我们会废弃掉某些功能或者提供了新功能。这个时候如果用户依然使用的是旧版本，由于某些服务已经废弃掉了则会报错。在这种新旧版本不兼容的情况下，如何强制用户进行 CLI 的升级呢？需要在运行命令之前检查本地的 CLI 是否和远程提供的新版本是否兼容。在新旧版本不兼容时，会强制全量更新。如何判断当前用户安装的本地版本和远程最新版本是否兼容呢？</p> <p>这里非常巧妙的运用了一下 npm 的 registry 机制，每次发布新版本，我们会在 package.json 里面新增一个自定义字段 compatibleVersion，它的值是一个 semver 的版本号。本地检查时，会读取本地已经安装的版本和远程最新的版本进行比较，看看是否满足 compatibleVersion 的要求。如果不满足，则会自动运行 <code>npm install feflow-cli</code> 到最新的版本。</p> <div class="language- extra-class"><pre class="language-text"><code> &quot;configs&quot;: {
+    &quot;compatibleVersion&quot;: &quot;&gt;=0.13.0&quot;
+ },
+</code></pre></div><p>对于插件，采取的是增量更新机制。每个发布到 npm 上的插件的 package.json 中同样会有上面的这个字段，对于本地安装的不兼容的插件列表，会采取增量更新。</p> <h3 id="多类型脚手架的架构设计"><a href="#多类型脚手架的架构设计" aria-hidden="true" class="header-anchor">#</a> 多类型脚手架的架构设计</h3> <p>项目拷贝存在的问题显而易见，大致有以下三个方面：</p> <ul><li>容易出错；一旦某个关键文件拷贝丢失或者错误，很可能需要耗费半天到一天的时间排查环境问题。</li> <li>不同场景下对目录结构要求不同；平时开发过程中，工程通常会分为运营活动、Hybrid 业务、入口级别的项目（对性能和体验有极致和苛刻的要求）。需要基于 RN 或者 Node.js 的首屏直出，还有常用的业务组件等的开发。</li> <li>新的 Feature 和 BugFix 难以同步；某个同学开发过程中增加的新方法或者解决的 bug 很难传递给其它同学并且沉淀成经验积累下来。</li></ul> <p>社区里面提供了完美的 Yeoman 解决方案，它是为了自动化项目的创建而生。Yeoman 创建项目包括以下几个阶段：</p> <ul><li>initializing: 初始化一些状态之类的，通常是和用户输入的 options 或者 arguments 打交道</li> <li>prompting: 和用户交互的时候（命令行问答之类的）调用</li> <li>configuring: 保存配置文件（如 .babelrc 等）</li> <li>writing: 生成模板文件</li> <li>install: 安装依赖</li> <li>end: 结束部分，初始代码自动提交</li></ul> <p>我们只需要继承 Yeoman 的 Generator 类做模板定制化，基于 Yeoman 的脚手架设计思路应该如下图所示：
+<img src="https://qpic.url.cn/feeds_pic/Q3auHgzwzM5OeF65JG7fNeUbvwzbQ7wEjX4Bzs5TBJjgyZ9r8F7gZA/" alt></p> <p>当开发者输入 feflow init 命令时，开发者会告诉 CLI 需要创建哪一种类型的项目，CLI 收到命令后。从本地已经安装的 Yeoman 脚手架里面选择某种类型的模板。然后，CLI 会调用 Gitlab API 在远程创建仓库并且授予开发者 master 权限。接下来，会根据实际业务场景需要，自动化申请一些打点信息，常见的如离线包 id，监控告警 id 等等。之后，在本地目录生成代码并且安装项目依赖的 npm 包，最后将本次初始化生成的所有代码自动提交到远程 Git 仓库。</p> <h3 id="多类型主流构建支持"><a href="#多类型主流构建支持" aria-hidden="true" class="header-anchor">#</a> 多类型主流构建支持</h3> <p>为了让 feflow 支持多种类型的构建环境，比如 Fis3 和 webpack，或者前不久刚推出的号称零配置成本的 Parcel 构建。在每个项目的跟目录会放置一份配置文件，名称为 feflow.json。它的配置可能是这样的：</p> <div class="language- extra-class"><pre class="language-text"><code>{
+    &quot;builderType&quot;: &quot;builder-webpack3&quot;,
+    &quot;builderOptions&quot;: {
+        &quot;moduleName&quot;: &quot;mobile&quot;,
+        &quot;bizName&quot;: &quot;category&quot;,
+        &quot;minifyHTML&quot;: true,
+        &quot;minifyCSS&quot;: true,
+        &quot;minifyJS&quot;: true,
+        &quot;usePx2rem&quot;: true,
+        &quot;remUnit&quot;: 100,
+        &quot;remPrecision&quot;: 8,
+        &quot;inject&quot;: true,
+        &quot;port&quot;: 8001
+    }
+}
+</code></pre></div><p>builderType 为构建的 npm 包，builderOptions 为构建的参数配置。</p> <h3 id="最后"><a href="#最后" aria-hidden="true" class="header-anchor">#</a> 最后</h3> <p>腾讯 IVWEB 团队的工程化解决方案 feflow 已经开源：Github 主页：https://github.com/feflow/feflow</p> <p>如果对您的团队或者项目有帮助，请给个 Star 支持一下哈～</p></div></div></div></div> <footer class="footer" data-v-0ac59e36 data-v-4234d345><div class="footer__links" data-v-0ac59e36><ul class="links standard-container" data-v-3544c71c data-v-0ac59e36><li class="links__item links__title" data-v-3544c71c>友情链接</li> <li class="links__item" data-v-3544c71c><a href="https://opensource.tencent.com/" target="_blank" data-v-3544c71c>腾讯开源</a></li></ul></div> <div class="footer__copyright" data-v-0ac59e36><div class="copyright standard-container" data-v-e11bbbb2 data-v-0ac59e36><div class="copyright__text" data-v-e11bbbb2><p data-v-e11bbbb2>© 2019 Feflow.js</p> <p data-v-e11bbbb2>Documentation licensed under MIT.</p></div> <div class="copyright__group" data-v-e11bbbb2><i class="copyright__wechat" data-v-e11bbbb2></i> <a href="https://github.com/feflow/feflow/" target="_blank" class="copyright__github" data-v-e11bbbb2></a></div></div></div></footer></div></div>
+    <script src="/feflow-site/assets/js/app.830bb5f6.js" defer></script><script src="/feflow-site/assets/js/31.76a17541.js" defer></script>
+  </body>
+</html>
