@@ -1,6 +1,6 @@
 # 自定义脚手架
 
-当运行 `feflow init` 的时候，Feflow 的内置插件会调用一个脚手架来创建项目。那么，如何创建一个自己的脚手架呢？
+当运行 `fef init` 的时候，Feflow 的内置插件会调用一个脚手架来创建项目。那么，如何创建一个自己的脚手架呢？
 
 其实不难，我们充分利用了社区的力量，只要你的脚手架是一个 Yeoman 脚手架即可。如果你会开发 Yeoman 脚手架，那么你已经基本能够开发一个自己的脚手架了；如果你不会，文章后面的部分也会简单地讲解一下。
 
@@ -143,13 +143,13 @@ Yeoman 提供了一个基础的生成器类 `Generator`，我们基于它扩展�
 ```sh
 cd <your-path>/generator-startkit-demo
 npm link
-cd ~/.feflow
+cd ~/.fef
 npm link generator-startkit-demo
 ```
 
-然后再编辑 `~/.feflow/package.json` 文件（可用 `vi ~/.feflow/package.json` 编辑），在 `dependencies` 字段中添加一行 `"generator-startkit-demo": "1.0.0"`（版本号随意）。目的是为了让 Feflow 找到你的脚手架。
+然后再编辑 `~/.fef/package.json` 文件（可用 `vi ~/.fef/package.json` 编辑），在 `dependencies` 字段中添加一行 `"generator-startkit-demo": "1.0.0"`（版本号随意）。目的是为了让 Feflow 找到你的脚手架。
 
-现在，可以在你想创建项目的位置运行 `feflow init` 了。你会看到你的脚手架被展示出来了，选择它，就能开始项目的创建了。
+现在，可以在你想创建项目的位置运行 `fef init` 了。你会看到你的脚手架被展示出来了，选择它，就能开始项目的创建了。
 
 > `generator-feflow-example` 的源码地址是 https://github.com/feflow/generator-feflow-example
 

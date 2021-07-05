@@ -22,7 +22,6 @@ const generateSidebarConfig = language => {
                 'base-overview',
                 'base-install',
                 'base-init',
-                'base-develope',
                 'base-build',
                 'base-plugins-inner'
             ]

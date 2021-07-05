@@ -9,7 +9,7 @@ Feflow 之所以强大离不开它的插件设计，你可以把 Feflow 看成�
 开发一个 Feflow 插件意味着给 Feflow 增加命令，例如你可以给 Feflow 增加一个 `add` 命令，让 Feflow 实现一个加法运算：
 
 ```sh
-feflow add 1 2 3
+fef add 1 2 3
 # 输出 6
 ```
 
@@ -70,16 +70,16 @@ feflow.cmd.register('add', '加法运算器', function(args) {
 截至目前，你已经完成了一个插件，完整的代码可参考[这里](https://github.com/feflow/feflow-plugin-example/tree/e21b0b5c5f5b860e78e5d914f4ce4ccf366eee8d)。你可能迫不及待想试试。别急，让我们一步一步来。
 
 1. 运行 `npm link` 将插件项目链接到 NPM 全局。
-1. 运行 `cd ~/.feflow` 进入到 Feflow 主目录下。
+1. 运行 `cd ~/.fef` 进入到 Feflow 主目录下。
 1. 运行 `npm link feflow-plugin-example` 将插件安装在 Feflow 主目录下。
-1. 编辑 `~/.feflow/package.json` 文件（可用 `vi ~/.feflow/package.json` 编辑），在 `dependencies` 字段中添加一行 `"feflow-plugin-example": "1.0.0"`。
-1. 运行 `feflow add 1 2 3` 启用插件。
+1. 编辑 `~/.fef/package.json` 文件（可用 `vi ~/.fef/package.json` 编辑），在 `dependencies` 字段中添加一行 `"feflow-plugin-example": "1.0.0"`。
+1. 运行 `fef add 1 2 3` 启用插件。
 
 ## 插件发布
 
 插件开发完毕后，接下来就可以发布插件了，你可以发布到 NPM 上，也可以发布到私有 NPM 仓库里。如果发布到私有仓库，可能需要配置一下 Feflow 下载包的 `register` 和 `proxy`，配置方式参考[插件](./base-plugins-inner#全局配置插件)。
 
-发布完之后，你就可以通过 `feflow install` 命令安装插件。
+发布完之后，你就可以通过 `fef install` 命令安装插件。
 
 ## 插件上下文
 
