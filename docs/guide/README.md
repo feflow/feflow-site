@@ -6,7 +6,7 @@ Welcome to Feflow, this document will help you get started quickly. And if you h
 
 ## What is Feflow
 
-Feflow (pronounced /ˈfefləʊ/) is a **front-end flow and rule tool** to improve engineering efficiency. The latest version is v0.15.8, and is hosted on Github: [feflow](https://github.com/feflow/feflow). At present, it has been used in many application, such as Now, Huayang Live, Huayang Friends, Mobile QQ Near Hand, Group Video, Group Gift, Huiyin, Tencent Myapp, Penguins and etc. With 80+ WEB/IOS/Andriod stable users, the cumulative production project reached 240+.
+Feflow (pronounced /ˈfefləʊ/) is a **front-end flow and rule tool** to improve engineering efficiency., and is hosted on Github: [feflow](https://github.com/feflow/feflow). At present, it has been used in many application, such as Now, Huayang Live, Huayang Friends, Mobile QQ Near Hand, Group Video, Group Gift, Huiyin, Tencent Myapp, Penguins and etc. With 80+ WEB/IOS/Andriod stable users, the cumulative production project reached 240+.
 
 Feflow refers to the thinking of Pipeline and divides work into five steps: init, develop, build, test, deploy. And corresponding to five basic commands: init, dev, build, test and deploy.
 
@@ -21,7 +21,7 @@ Feflow only provides a CLI and kernel. The CLI is responsible for interacting wi
 So, if you want to use Feflow in a team, you need to understand the following concepts:
 
 - [Scaffold](#Scaffold)
-- [Builder](#Builder)
+- [Starkit](#Starkit)
 - [Plugin](#Plugin)
 - [Development-specification](#Development-specification)
 
@@ -33,11 +33,9 @@ To solve this problem, Feflow introduced the community's mainstream scaffolding 
 
 After introducing scaffolding, on the one hand, the team can maintain a unified technology stack and unified directory structure; on the other hand, it can also do some automated things when initializing the project, such as automatically creating remote Git repository and assigning developers master/developer rights limit, application monitoring Id, and internal CI/CD system to open quickly and so on.
 
-### Builder
+### Starkit
 
-After the project is created, the next issue is local development and code packaging. The usual practice is to put the build script directly in the business project. Each business developer can modify it according to his own needs. The problem is that the build scripts of each project are different, the construction is not uniform, and each Projects need to repeatedly install build dependencies.
-
-Feflow introduces the concept of a builder. Its basic idea is to manage the build scripts in a unified manner, and the maintenance is carried out by the students who are familiar with the build. The builder needs to be published to npm for version management, and it is recommended that each project use the same builder. After the builder is installed via feflow, it will be stored under `~/.feflow/node_modules` so that each project can share a set of build scripts.
+Feflow introduces the concept of starkits. You can understand the concept of development kits as similar to the relationship between `babel-presets` and `babel-plugin`. `babel-presets` is a collection of a series of `babel-plugins`. The development kit is actually composed of multiple plug-ins. ; The package is used to provide commands for a certain type of project, usually a collection of multiple commands. The Feflow development kit needs to start with feflow-devkit-*, and the development kit needs to be published to npm after the development is completed. Normally, the team members who are familiar with the construction will perform unified maintenance.
 
 ### Plugin
 

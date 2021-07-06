@@ -64,26 +64,13 @@ yo generator
     |- index.html # HTML 入口
     |- index.js # JS 入口，也是 Webpack 打包的入口
 |- _babelrc # 处理 JSX 的配置
-|- feflow.json # 这个文件是必须的，作为项目和 Feflow 的桥梁
+|- .feflowrc.js # 这个文件是必须的，作为项目和 Feflow 的桥梁
 ```
 
 其中，如果项目中含有 `.babelrc` 这样的文件，推荐在模版中将 `.` 换成 `_`，写成 `_babelrc` 这样的形式。
 
-另外，`feflow.json` 是必须的配置文件，Feflow 会读取其中的构建器配置来对 src 中的源码进行打包构建。
+另外，`.feflowrc.js` 是必须的配置文件，Feflow 会读取其中的构建器配置来对 src 中的源码进行打包构建。
 
-这里要说明一下，Feflow 定义了一个构建器的概念，实际上它指的就是把构建的代码抽离出项目形成的 NPM 包。这样做的好处在于，团队内部的项目遇到构建工具升级的时候，无需对每个项目都进行一遍升级，只需要升级构建器并更改项目中 `feflow.json` 中的配置即可。其他的好处例如节省本地空间、节省项目安装依赖包的时间、统一构建规范等等。
-
-下面是我们这个项目示例的 `feflow.json` 的配置：
-
-```json
-{
-    // builderType 指明了构建器的名称
-    "builderType": "builder-feflow-example",
-    "builderOptions": {
-        // 你可以在这里加入自定义构建器构建流程的配置项，例如是否需要压缩 HTML 等
-    }
-}
-```
 
 > 构建器 builder-feflow-example 只适用于本教程示例脚手架生成的项目，其他脚手架生成的项目需要适配构建器，关于构建器的开发请阅读 [自定义构建器](./advance-builder-custom.md) 这一章。
 

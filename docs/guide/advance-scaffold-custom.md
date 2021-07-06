@@ -64,28 +64,13 @@ The main structure of our scaffold is as below:
     |- index.html # HTML entry
     |- index.js # JS entry, Webpack build entry
 |- _babelrc # process JSX config
-|- feflow.json # necessary
+|- .feflowrc.js # necessary
 ```
 
 If we use files like `.babelrc`, we'd better transform `.` to `_` as `_babelrc`.
 
-And, `feflow.json` is the neccessary configure file. Feflow will read the configuration and build source code in src directory.
+And, `.feflowrrc.js` is the neccessary configure file. Feflow will read the configuration and build source code in src directory.
 
-Here we need to introduce the idea of **builder**. In fact it is a npm package about everything of building. The advantage of this is because when the project in a team has to update their building tools, they don't need to update for every project. All they need is to update the builder and the configration of `feflow.json`. Other advantages is about saving local space, saving time for installing dependencies for project, unify the project rules and so on.
-
-Here is the `feflow.json` of our example:
-
-```json
-{
-    // builderType is the name of builder
-    "builderType": "builder-feflow-example",
-    "builderOptions": {
-        // You can add some options heare to custom building procedure. Such as if we need to uglify our html.
-    }
-}
-```
-
-> builder-feflow-example is only compatiable with the project generated in this handbook. Other generators need other builders. To know more about developing builders please read [Customed Builder](./advance-builder-custom.md).
 
 ##### Dynamic scaffold
 

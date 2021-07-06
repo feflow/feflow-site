@@ -4,15 +4,33 @@
 
 Feflow support Node 6.0 and above, you can use follow command to install it:
 
+**Use npm**
+
 ```sh
-npm i feflow-cli -g
-# or `yarn global add feflow-cli`
+npm install @feflow/cli -g
 ```
+
+**use yarn**
+
+```sh
+npm install yarn -g
+
+yarn global add @feflow/cli
+
+fef config set packageManager yarn
+```
+
+If you are installing for the first time, you need to run `Feflow` once to initialize:
+
+```sh
+fef
+```
+
 
 After install, you can run `feflow` to init:
 
 ```sh
-feflow
+fef
 ```
 
 ![Feflow Init](https://pub.idqqimg.com/45b5f10631af4b6da8a7c81ac8eea01c.svg)
@@ -22,7 +40,7 @@ Here you may write the npm registry and npm proxy config to make Feflow download
 If you accidentally use the default configuration, you can also configure it with the following command. Take the Taobao registry as an example:
 
 ```sh
-feflow config set registry https://registry.npm.taobao.org
+fef config set registry https://registry.npm.taobao.org
 ```
 
 > Read [this](./base-plugins-inner.md#Global-Config-Plugin) can get more informations about feflow config command.
@@ -39,10 +57,3 @@ feflow install generator-ivweb
 
 Now, the scaffold is installed successfully, you can start creating your project.
 
-## Install Builder (optional)
-
-If you used `generator-ivweb` to create project, you can install [builder-webpack4](https://github.com/feflow/builder-webpack4) as a builder, which is default builder in this project. However, if you don't install it, when you run `feflow dev`, Feflow will install it automatically.
-
-```sh
-feflow install builder-webpack4
-```
