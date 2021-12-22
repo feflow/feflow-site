@@ -107,7 +107,7 @@ export default run;
 
 ## [#](#调试和发布) 调试和发布
 
-开发好了套件，就要开始调试了，这里和以前构建器的调试有点区别，**你需要将套件 npm link 在项目的 node\_modules 里面，而不是 ~/.feflow 的 node\_modules 里面**，项目里通过 .feflowrc.json 文件来声明项目的命令所对应的套件命令，格式如下（以 .js 格式的文件为例）：
+开发好了套件，就要开始调试了，这里和以前构建器的调试有点区别，**你需要将套件 npm link 在项目的 node\_modules 里面，而不是 ~/.fef 的 node\_modules 里面**，项目里通过 `.feflowrc.json` / `.feflowrc.js` 文件来声明项目的命令所对应的套件命令，格式如下（以 .js 格式的文件为例）：
 
 ```js
 module.exports = {

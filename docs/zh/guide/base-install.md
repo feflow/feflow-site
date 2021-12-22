@@ -47,7 +47,7 @@ fef config set registry https://registry.npm.taobao.org
 `Feflow` 的核心部分并没有一个脚手架，脚手架都是通过 `Feflow` 来安装的。为了简单起见，你可以先使用我们团队提供的脚手架 [generator-ivweb](https://github.com/feflow/generator-ivweb) 来继续这个教程。可以用如下命令安装：
 
 ```sh
-fef install generator-ivweb
+fef install @feflow/generator-example
 ```
 
 > 关于脚手架详细内容可以看[这里](./advance-scaffold-custom.md)

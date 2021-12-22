@@ -32,8 +32,7 @@ const generateSidebarConfig = language => {
                 'advance-overview',
                 'advance-scaffold-custom',
                 'advance-builder-custom',
-                'advance-plugins-custom',
-                'advance-plugins-context'
+                'advance-plugins-custom'
             ]
         },
         {
