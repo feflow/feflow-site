@@ -1,8 +1,7 @@
 # 介绍
 
-欢迎使用 Feflow，本文档将帮助您快速上手。如果您在使用过程中遇到问题，请在 [GitHub](https://github.com/feflow/feflow/issues) 上反馈。
+欢迎使用 Feflow，本文档将帮助您快速上手。如果您在使用过程中遇到问题，请在 [GitHub](https://github.com/Tencent/feflow/issues) 上反馈。
 
-![feflow](https://pub.idqqimg.com/3cb9b240fbbc4a5d946ceb96325be36f.svg)
 
 ## Feflow 是什么
 
