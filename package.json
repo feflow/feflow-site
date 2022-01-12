@@ -27,7 +27,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "humps": "^2.0.1",
-    "markdown-it": "^8.4.2",
+    "markdown-it": "^12.3.2",
     "query-string": "^6.4.0"
   },
   "browserslist": [
