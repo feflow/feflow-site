@@ -22,7 +22,7 @@
     "eslint-plugin-vue": "^5.2.2",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
-    "vuepress": "^0.14.10"
+    "vuepress": "^1.9.7"
   },
   "dependencies": {
     "axios": "^0.18.0",
